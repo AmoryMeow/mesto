@@ -1,23 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>mesto</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
   <header class="header">
-    
+    <img src="./images/logo-white.svg" alt="Логотип" class="logo">
   </header>
 
   <main class="content">
-    
+    <section class="profile">
+      <img src="" alt="" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <p class="profile__bio">Исследователь океана</p>
+        <button class="profile__edit-button"></button>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
 
+    <section class="cards">
+      <div class="card">
+        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+        <h2 class="card__title">Карачаевск</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="./images/elbrus.svg" alt="Эльбрус" class="card__image">
+        <h2 class="card__title">Гора Эльбрус</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="./images/dombai.png" alt="Домбай" class="card__image">
+        <h2 class="card__title">Домбай</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="./images/elbrus.svg" alt="Эльбрус" class="card__image">
+        <h2 class="card__title">Гора Эльбрус</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="./images/dombai.png" alt="Домбай" class="card__image">
+        <h2 class="card__title">Домбай</h2>
+        <div class="card__like"></div>
+      </div>
+      <div class="card">
+        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+        <h2 class="card__title">Карачаево-Ч...</h2>
+        <div class="card__like"></div>
+      </div>
+    </section>
   </main>
 
+  <form action="post" class="edit-form">
+    <img src="" alt="" class="edit-form__close">
+    <h2 class="edit-form__title">Редактировать профиль</h2>
+    <input type="text" class="edit-form__name">
+    <input type="text" class="edit-form__bio">
+    <button class="edit-form__save">Сохранить</button>
+  </form>
+
   <footer class="footer">
-    
+    <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 
 </body>
