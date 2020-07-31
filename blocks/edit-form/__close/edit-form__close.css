@@ -1,0 +1,12 @@
+.edit-form__close {
+  background-image: url('../../../images/close-icon.svg');
+  position: absolute;
+  top: -43px;
+  right: -47px;
+  width: 40px;
+  height: 40px;
+}
+
+.edit-form__close:hover {
+  background-image: url('../../../images/close-icon-hover.svg');
+}

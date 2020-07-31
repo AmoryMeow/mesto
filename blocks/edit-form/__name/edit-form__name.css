@@ -1,0 +1,13 @@
+.edit-form__name {
+  height: 57px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.edit-form__name:focus {
+  outline: none;
+}
