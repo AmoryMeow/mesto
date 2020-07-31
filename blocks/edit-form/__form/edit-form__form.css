@@ -1,3 +1,11 @@
 .edit-form__form {
   position: relative;
+  max-width: 430px;
+  width: 100%;
+  min-height: 330px;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 36px;
+  box-sizing: border-box;
+  border-radius: 10px;
 }
