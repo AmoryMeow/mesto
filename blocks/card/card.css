@@ -1,5 +1,7 @@
 .card {
   max-width: 282px;
+  max-height: 361px;
+  box-sizing: border-box;
   margin-top: 21px;
   background-color: #ffffff;
   color: #000000;
@@ -8,6 +10,6 @@
 
 @media (max-width: 324px) {
   .card {
-    padding-top: 20px;
+    margin-top: 20px;
   }
 }
