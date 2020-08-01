@@ -1,4 +1,4 @@
-.edit-form__close {
+.popup__close {
   position: absolute;
   top: -37px;
   right: -35px;
@@ -8,7 +8,7 @@
   z-index: 2;
 }
 
-.edit-form__close::before {
+.popup__close::before {
   content: '';
   position: absolute;
   left: 20px;
@@ -18,7 +18,7 @@
   background-color: #ffffff;
 }
 
-.edit-form__close::after {
+.popup__close::after {
   content: '';
   position: absolute;
   left: 20px;
@@ -28,6 +28,6 @@
   background-color: #ffffff;
 }
 
-.edit-form__close:hover {
+.popup__close:hover {
   opacity: 0.6;
 }

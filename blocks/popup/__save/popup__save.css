@@ -1,4 +1,4 @@
-.edit-form__save {
+.popup__save {
   margin-top: 48px;
   font-size: 18px;
   line-height: 22px;
@@ -12,6 +12,6 @@
   border-radius: 2px;
 }
 
-.edit-form__save:hover {
+.popup__save:hover {
   background-color: rgba(0, 0, 0, 0.8) ;
 }
