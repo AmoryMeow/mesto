@@ -1,4 +1,4 @@
-.edit-form__bio {
+.popup__bio {
   height: 57px;
   width: 100%;
   border: none;
@@ -8,6 +8,6 @@
   line-height: 17px;
 }
 
-.edit-form__bio:focus {
+.popup__bio:focus {
   outline: none;
 }

@@ -1,4 +1,4 @@
-.edit-form__name {
+.popup__name {
   height: 57px;
   width: 100%;
   border: none;
@@ -8,6 +8,6 @@
   line-height: 17px;
 }
 
-.edit-form__name:focus {
+.popup__name:focus {
   outline: none;
 }
