@@ -31,3 +31,8 @@
 .popup__close:hover {
   opacity: 0.6;
 }
+
+@media (max-width: 505px) {
+  .popup__close {
+    right: 0;
+}
