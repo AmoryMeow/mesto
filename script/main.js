@@ -29,3 +29,11 @@ function formSubmitHandler (evt) {
 };
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+/*сердечки*/
+let likes = document.querySelectorAll('.card__like');
+likes.forEach(like => {
+  like.addEventListener('click', function() {
+    like.classList.toggle('card__like_liked');
+  });
+});

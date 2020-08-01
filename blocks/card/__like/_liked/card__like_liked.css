@@ -1,0 +1,3 @@
+.card__like_liked {
+  filter: invert(23%) sepia(95%) saturate(7495%) hue-rotate(358deg) brightness(96%) contrast(114%);
+}
