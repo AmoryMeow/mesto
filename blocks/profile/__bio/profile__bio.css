@@ -5,10 +5,20 @@
   font-style: normal;
   font-weight: normal;
   margin-top: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 500px;
 }
 
 @media (max-width: 882px) {
   .profile__bio {
     text-align: center;
+  }
+}
+
+@media (max-width: 582px) {
+  .profile__bio {
+    max-width: calc(100vw - 38px);
   }
 }

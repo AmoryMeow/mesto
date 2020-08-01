@@ -6,6 +6,9 @@
   font-weight: 500;
   padding-right: 17px;
   box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media (max-width: 882px) {
