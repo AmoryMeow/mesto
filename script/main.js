@@ -1,33 +1,35 @@
-/*form*/
-let popupClose = document.querySelector('.popup__close');
-let editButton = document.querySelector('.profile__edit-button');
-let saveButton = document.querySelector('.popup__save');
-let formElement = document.querySelector('.popup__container');
 /*popup*/
 let popup = document.querySelector('.popup');
-let popupName = popup.querySelector('.popup__name');
-let popupBio = popup.querySelector('.popup__bio');
+let popupName = popup.querySelector('.popup__input_type_name');
+let popupBio = popup.querySelector('.popup__input_type_bio');
 /*profile*/
 let profile = document.querySelector('.profile');
 let profileName = profile.querySelector('.profile__name');
 let profileBio = profile.querySelector('.profile__bio');
+/*form*/
+let popupClose = document.querySelector('.popup__close');
+let editButton = document.querySelector('.profile__edit-button');
+let formElement = document.querySelector('.popup__container');
 
-popupClose.addEventListener('click', function() {
+function closePopup() {
   popup.classList.remove('popup_opened');
-});
+}
 
-editButton.addEventListener('click', function() {
-  popup.classList.add('popup_opened');
+function openPopup() {
   popupName.value = profileName.textContent;
   popupBio.value = profileBio.textContent;
-});
+  popup.classList.add('popup_opened');
+}
 
 function formSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
   profileName.textContent = popupName.value;
   profileBio.textContent = popupBio.value;
+  closePopup();
 };
 
+popupClose.addEventListener('click', closePopup);
+editButton.addEventListener('click', openPopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
 /*сердечки*/

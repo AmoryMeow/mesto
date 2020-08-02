@@ -1,4 +1,4 @@
-.popup__name {
+.popup__input {
   height: 57px;
   width: 100%;
   border: none;
@@ -8,6 +8,6 @@
   line-height: 17px;
 }
 
-.popup__name:focus {
+.popup__input:focus {
   outline: none;
 }
