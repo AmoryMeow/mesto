@@ -26,8 +26,9 @@
     </section>
 
     <section class="cards">
+      <!--
       <article class="card">
-        <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+        <img src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" alt="Карачаевск" class="card__image">
         <div class="card__heading">
           <h2 class="card__title">Карачаевск</h2>
           <button class="card__like" type="button"></button>
@@ -68,6 +69,7 @@
           <button class="card__like" type="button"></button>
         </div>
       </article>
+      -->
     </section>
   </main>
 
@@ -84,6 +86,17 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
+
+
+  <template id="card-template">
+    <article class="card">
+      <img src="" alt="" class="card__image">
+      <div class="card__heading">
+        <h2 class="card__title"></h2>
+        <button class="card__like" type="button"></button>
+      </div>
+    </article>
+  </template>
 
   <script src="./script/main.js"></script>
 </body>
