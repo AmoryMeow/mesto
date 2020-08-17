@@ -97,6 +97,9 @@ function createCard(cardName, cardLink) {
   cardImage.src = cardLink;
   cardImage.alt = cardName;
 
+  deleteButton = newCard.querySelector('.card__delete');
+  deleteButton.addEventListener('click', deleteCard);
+
   return(newCard);
 }
 
@@ -106,11 +109,17 @@ function addCard(cardName, cardLink) {
 }
 
 function openPopupAddCard() {
+  popupPlace.value = '';
+  popupLink.value = '';
   popupCard.classList.add('popup_opened');
 }
 
 function closePopupAddCard() {
   popupCard.classList.remove('popup_opened');
+}
+
+function deleteCard(evt) {
+  evt.target.parentElement.remove();
 }
 
 function formSubmitAddCard (evt) {
