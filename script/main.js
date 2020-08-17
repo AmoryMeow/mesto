@@ -51,6 +51,7 @@ const popupImage = document.querySelector('.popup_type_image');
 /**button**/
 const popupCloseImage = popupImage.querySelector('.popup__close');
 
+/***popup user***/
 function closePopup() {
   popupUser.classList.remove('popup_opened');
 }
@@ -72,13 +73,7 @@ popupClose.addEventListener('click', closePopup);
 editButton.addEventListener('click', openPopup);
 formElement.addEventListener('submit', formSubmitHandler);
 
-/*сердечки*/
-const likes = document.querySelectorAll('.card__like');
-likes.forEach(like => {
-  like.addEventListener('click', function() {
-    like.classList.toggle('card__like_liked');
-  });
-});
+/***cards***/
 
 /*загрузка карточек*/
 function updateCards() {
@@ -106,7 +101,10 @@ function createCard(cardName, cardLink) {
   deleteButton = newCard.querySelector('.card__delete');
   deleteButton.addEventListener('click', deleteCard);
 
-  return(newCard);
+  likeButton = newCard.querySelector('.card__like');
+  likeButton.addEventListener('click', likeImage);
+
+  return newCard;
 }
 
 function addCard(cardName, cardLink) {
@@ -125,6 +123,7 @@ function closePopupAddCard() {
 }
 
 function deleteCard(evt) {
+  evt.target.removeEventListener('click', deleteCard);
   evt.target.parentElement.remove();
 }
 
@@ -138,9 +137,8 @@ addButton.addEventListener('click', openPopupAddCard);
 popupCloseAddCard.addEventListener('click', closePopupAddCard);
 formAddCard.addEventListener('submit', formSubmitAddCard);
 
+/***popup image***/
 function openPopupImage(evt) {
-  console.log(evt.target.alt);
-
   const popupImg = popupImage.querySelector('.popup__image');
   popupImg.src = evt.target.src;
   popupImg.alt = evt.target.alt;
@@ -157,4 +155,11 @@ function closePopupImage() {
 
 popupCloseImage.addEventListener('click', closePopupImage);
 
+/***likes***/
+function likeImage(evt) {
+  like = evt.target;
+  like.classList.toggle('card__like_liked');
+}
+
+/***start***/
 updateCards();
