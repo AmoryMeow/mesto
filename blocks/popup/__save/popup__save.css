@@ -16,3 +16,12 @@
 .popup__save:hover {
   background-color: rgba(0, 0, 0, 0.8) ;
 }
+
+@media (max-width: 425px) {
+  .popup__save {
+    font-size: 14px;
+    line-height: 17px;
+    height: 40px;
+    margin-top: 36px;
+  }
+}

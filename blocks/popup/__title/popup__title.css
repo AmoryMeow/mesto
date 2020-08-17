@@ -5,3 +5,11 @@
   margin: 0;
   margin-bottom: 24px;
 }
+
+@media (max-width: 425px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 16px;
+  }
+}
