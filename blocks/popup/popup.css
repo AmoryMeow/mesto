@@ -1,19 +1,10 @@
-@keyframes fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .popup {
   position: fixed;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  display: none; /*flex; */
+  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2;
@@ -21,4 +12,7 @@
   padding: 40px;
   box-sizing: border-box;
   animation: fade .3s linear;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .3s, opacity .3s ease;
 }
