@@ -15,4 +15,5 @@
 
 .card__delete:hover {
   background-image: url('../../../images/delete-button-hover.svg');
+  cursor: pointer;
 }
