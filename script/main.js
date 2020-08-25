@@ -32,7 +32,7 @@ const popupBio = popupUser.querySelector('.popup__input_type_bio');
 /**button**/
 const popupClose = popupUser.querySelector('.popup__close');
 const editButton = document.querySelector('.profile__edit-button');
-const formElement = popupUser.querySelector('.popup__container');
+const formElement = popupUser.querySelector('.popup__form');
 /*profile*/
 const profile = document.querySelector('.profile');
 const profileName = profile.querySelector('.profile__name');
@@ -45,7 +45,7 @@ const popupLink = popupCard.querySelector('.popup__input_type_link');
 /**button**/
 const addButton = document.querySelector('.profile__add-button');
 const popupCloseAddCard = popupCard.querySelector('.popup__close');
-const formAddCard = popupCard.querySelector('.popup__container');
+const formAddCard = popupCard.querySelector('.popup__form');
 /*popup image*/
 const popupImage = document.querySelector('.popup_type_image');
 const popupImg = popupImage.querySelector('.popup__image');
