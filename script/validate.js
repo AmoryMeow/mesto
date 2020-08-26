@@ -20,12 +20,34 @@ function isValid(formElement,inputElement,setting) {
   }
 }
 
+function hasInvalidInput(inputList) {
+  return inputList.some( (inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+function toggleButton(inputList,buttonElement,inactiveButtonClass) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(inactiveButtonClass);
+  } else {
+    buttonElement.classList.remove(inactiveButtonClass);
+  }
+}
+
 function setEventListeners(formElement,setting) {
   const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
+  const buttonElement = formElement.querySelector(setting.submitButtonSelector);
+  toggleButton(inputList,buttonElement, setting.inactiveButtonClass);
+
   inputList.forEach( (inputElement) => {
     inputElement.addEventListener('input', function(evt) {
       isValid(formElement,inputElement,setting);
-    })
+      toggleButton(inputList,buttonElement, setting.inactiveButtonClass);
+    });
+    inputElement.addEventListener('change', function(evt) {
+      isValid(formElement,inputElement,setting);
+      toggleButton(inputList,buttonElement, setting.inactiveButtonClass);
+    });
   });
 }
 
@@ -47,4 +69,5 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
+
 

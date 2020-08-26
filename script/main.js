@@ -56,6 +56,27 @@ const popupCloseImage = popupImage.querySelector('.popup__close');
 /***открытие-закрытие модальных окон***/
 function openPopup(modal) {
   modal.classList.add('popup_opened');
+  /*const formElement = modal.querySelector('.popup__form');
+  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+  const buttonElement = formElement.querySelector('.popup__button');
+  inputList.forEach( (inputElement) => {
+    isValid(formElement,inputElement,{
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  });
+  toggleButton(inputList,buttonElement, {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+  }.inactiveButtonClass);});*/
+
 }
 
 function closePopup(modal) {
