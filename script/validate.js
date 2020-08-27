@@ -72,9 +72,6 @@ function checkPopupValid(modal) {
     const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
     const buttonElement = formElement.querySelector(setting.submitButtonSelector);
 
-    inputList.forEach( (inputElement) => {
-      isValid(formElement,inputElement,setting);
-    });
     toggleButton(inputList,buttonElement,setting.inactiveButtonClass);
   }
 }
