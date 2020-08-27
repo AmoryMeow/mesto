@@ -1,3 +1,12 @@
+const setting = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
+
 function showErrorMessage(formElement,inputElement,setting) {
   const formError = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(setting.inputErrorClass);
@@ -44,10 +53,6 @@ function setEventListeners(formElement,setting) {
       isValid(formElement,inputElement,setting);
       toggleButton(inputList,buttonElement, setting.inactiveButtonClass);
     });
-    inputElement.addEventListener('change', function(evt) {
-      isValid(formElement,inputElement,setting);
-      toggleButton(inputList,buttonElement, setting.inactiveButtonClass);
-    });
   });
 }
 
@@ -61,13 +66,17 @@ function enableValidation(setting) {
   });
   }
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-});
+function checkPopupValid(modal) {
+  const formElement = modal.querySelector(setting.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
+  const buttonElement = formElement.querySelector(setting.submitButtonSelector);
+
+  inputList.forEach( (inputElement) => {
+    isValid(formElement,inputElement,setting);
+  });
+  toggleButton(inputList,buttonElement,setting.inactiveButtonClass);
+}
+
+enableValidation(setting);
 
 
