@@ -68,13 +68,15 @@ function enableValidation(setting) {
 
 function checkPopupValid(modal) {
   const formElement = modal.querySelector(setting.formSelector);
-  const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
-  const buttonElement = formElement.querySelector(setting.submitButtonSelector);
+  if (formElement != null) {
+    const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
+    const buttonElement = formElement.querySelector(setting.submitButtonSelector);
 
-  inputList.forEach( (inputElement) => {
-    isValid(formElement,inputElement,setting);
-  });
-  toggleButton(inputList,buttonElement,setting.inactiveButtonClass);
+    inputList.forEach( (inputElement) => {
+      isValid(formElement,inputElement,setting);
+    });
+    toggleButton(inputList,buttonElement,setting.inactiveButtonClass);
+  }
 }
 
 enableValidation(setting);

@@ -158,5 +158,31 @@ popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
 popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
+/**клавиатура - Esc**/
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === "Escape") {
+    const popupList = Array.from(document.querySelectorAll('.popup'));
+    popupList.forEach( (popupItem) => {
+      if (popupItem.classList.contains('popup_opened')) {
+        closePopup(popupItem);
+      }
+    });
+  }
+},true);
+
+/*закрытие по клику мимо */
+function setListenerPopup() {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+  popupList.forEach( (popupItem) => {
+    popupItem.addEventListener('click', (evt) => {
+      if (evt.target === evt.currentTarget) {
+        closePopup(popupItem);
+      }
+    });
+  });
+}
+
+setListenerPopup();
+
 /***start***/
 renderInitialCards();
