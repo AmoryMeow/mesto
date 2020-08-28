@@ -89,6 +89,7 @@ function closeByEsc(event) {
   }
 }
 
+/*удаление обработчиков окна*/
 function removeListenerPopup(popupItem){
   popupItem.removeEventListener('click', closeByClickOverlay);
   document.removeEventListener('keydown', closeByEsc);
@@ -159,19 +160,10 @@ function deleteCard(evt) {
 }
 
 function saveNewCard (evt) {
-  console.log("saveNewCard -> evt", evt)
   evt.preventDefault();
   addCard(popupPlace.value,popupLink.value);
   closePopup(popupCard);
 };
-
-function addCardByEnter(event) {
-  /*if (event.key === 'Enter') {
-    //saveNewCard(event.target.closest('.popup__form'));
-    console.log("addCardByEnter -> event.target.closest('.popup__form')", event.target.closest('.popup__form'))
-
-  }*/
-}
 
 /***popup image***/
 function openPopupImage(evt) {
@@ -197,8 +189,6 @@ addButton.addEventListener('click', openPopupAddCard);
 popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
 popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
-
-popupPlace.addEventListener('keydown', addCardByEnter);
 
 
 /***start***/

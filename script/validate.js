@@ -29,17 +29,21 @@ function isValid(formElement,inputElement,setting) {
   }
 }
 
+/*есть ли проблемные поля */
 function hasInvalidInput(inputList) {
   return inputList.some( (inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 
+/*изменение доступности кноки*/
 function toggleButton(inputList,buttonElement,inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.disabled = 'disabled';
   } else {
     buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.disabled = '';
   }
 }
 
@@ -66,6 +70,7 @@ function enableValidation(setting) {
   });
   }
 
+/* при открытии попапа проверяем валидность формы */
 function checkPopupValid(modal) {
   const formElement = modal.querySelector(setting.formSelector);
   if (formElement != null) {
