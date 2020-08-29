@@ -78,6 +78,10 @@ function checkPopupValid(modal) {
     const buttonElement = formElement.querySelector(setting.submitButtonSelector);
 
     toggleButton(inputList,buttonElement,setting.inactiveButtonClass);
+    inputList.forEach((inputElement) => {
+      hideErrorMessage(formElement,inputElement,setting);
+    })
+
   }
 }
 

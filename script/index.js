@@ -1,30 +1,3 @@
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 /*popup user*/
 const popupUser = document.querySelector('.popup_type_user');
 const popupName = popupUser.querySelector('.popup__input_type_name');
@@ -57,7 +30,6 @@ const popupList = document.querySelectorAll('.popup');
 
 /***открытие-закрытие модальных окон***/
 function openPopup(modal) {
-  checkPopupValid(modal);
   setListenerPopup(modal);
   modal.classList.add('popup_opened');
 }
@@ -81,11 +53,8 @@ function closeByClickOverlay(event) {
 
 function closeByEsc(event) {
   if (event.key === "Escape") {
-    Array.from(popupList).forEach( (popupItem) => {
-      if (popupItem.classList.contains('popup_opened')) {
-        closePopup(popupItem);
-      }
-    });
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
 
@@ -99,6 +68,7 @@ function removeListenerPopup(popupItem){
 function openPopupUser() {
   popupName.value = profileName.textContent;
   popupBio.value = profileBio.textContent;
+  checkPopupValid(popupUser);
   openPopup(popupUser);
 }
 
@@ -151,12 +121,13 @@ function addCard(cardName, cardLink) {
 function openPopupAddCard() {
   popupPlace.value = '';
   popupLink.value = '';
+  checkPopupValid(popupCard);
   openPopup(popupCard);
 }
 
 function deleteCard(evt) {
   evt.target.removeEventListener('click', deleteCard);
-  evt.target.parentElement.remove();
+  evt.target.closest('.card').remove();
 }
 
 function saveNewCard (evt) {
