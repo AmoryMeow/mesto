@@ -163,4 +163,12 @@ popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
 
 /***start***/
-renderInitialCards();
+//renderInitialCards();
+
+import {Card} from './Card.js';
+
+initialCards.forEach( item => {
+  const newCard = new Card(item,'#card-template');
+  const cardElement = newCard.generateCard();
+  cardList.append(cardElement);
+});
