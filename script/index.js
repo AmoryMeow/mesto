@@ -68,7 +68,9 @@ function removeListenerPopup(popupItem){
 function openPopupUser() {
   popupName.value = profileName.textContent;
   popupBio.value = profileBio.textContent;
-  checkPopupValid(popupUser);
+  // checkPopupValid(popupUser);
+  const formElement = popupUser.querySelector('.popup__form');
+  console.log("openPopupUser -> formElement", formElement)
   openPopup(popupUser);
 }
 
@@ -82,53 +84,48 @@ function saveProfile (evt) {
 /***popup cards***/
 
 /*загрузка карточек*/
-function renderInitialCards() {
-  initialCards.forEach( item => {
-    const newCard = createCard(item.name, item.link);
-    cardList.append(newCard);
-  });
-}
+// function renderInitialCards() {
+//   initialCards.forEach( item => {
+//     const newCard = createCard(item.name, item.link);
+//     cardList.append(newCard);
+//   });
+// }
 
-/*создание карточки*/
-function createCard(cardName, cardLink) {
-  const cardTemplate = document.querySelector('#card-template').content;
+// /*создание карточки*/
+// function createCard(cardName, cardLink) {
+//   const cardTemplate = document.querySelector('#card-template').content;
 
-  const newCard = cardTemplate.cloneNode(true);
+//   const newCard = cardTemplate.cloneNode(true);
 
-  const cardTitle = newCard.querySelector('.card__title');
-  cardTitle.textContent = cardName;
+//   const cardTitle = newCard.querySelector('.card__title');
+//   cardTitle.textContent = cardName;
 
-  const cardImage = newCard.querySelector('.card__image');
-  cardImage.src = cardLink;
-  cardImage.alt = cardName;
+//   const cardImage = newCard.querySelector('.card__image');
+//   cardImage.src = cardLink;
+//   cardImage.alt = cardName;
 
-  cardImage.addEventListener('click', openPopupImage);
+//   cardImage.addEventListener('click', openPopupImage);
 
-  const deleteButton = newCard.querySelector('.card__delete');
-  deleteButton.addEventListener('click', deleteCard);
+//   const deleteButton = newCard.querySelector('.card__delete');
+//   deleteButton.addEventListener('click', deleteCard);
 
-  const likeButton = newCard.querySelector('.card__like');
-  likeButton.addEventListener('click', likeImage);
+//   const likeButton = newCard.querySelector('.card__like');
+//   likeButton.addEventListener('click', likeImage);
 
-  return newCard;
-}
-
-function addCard(cardName, cardLink) {
-  const newCard = createCard(cardName, cardLink);
-  cardList.prepend(newCard);
-}
+//   return newCard;
+// }
 
 function openPopupAddCard() {
   popupPlace.value = '';
   popupLink.value = '';
-  checkPopupValid(popupCard);
+  //checkPopupValid(popupCard);
   openPopup(popupCard);
 }
 
-function deleteCard(evt) {
-  evt.target.removeEventListener('click', deleteCard);
-  evt.target.closest('.card').remove();
-}
+// function deleteCard(evt) {
+//   evt.target.removeEventListener('click', deleteCard);
+//   evt.target.closest('.card').remove();
+// }
 
 function saveNewCard (evt) {
   evt.preventDefault();
@@ -137,20 +134,20 @@ function saveNewCard (evt) {
 };
 
 /***popup image***/
-function openPopupImage(evt) {
-  popupImg.src = evt.target.src;
-  popupImg.alt = evt.target.alt;
+export function openPopupImage(cardName, cardLink) {
+  popupImg.src = cardLink;
+  popupImg.alt = cardName;
 
-  popupCaption.textContent = evt.target.alt;
+  popupCaption.textContent = cardName;
 
   openPopup(popupImage);
 }
 
 /***likes***/
-function likeImage(evt) {
-  const like = evt.target;
-  like.classList.toggle('card__like_liked');
-}
+// function likeImage(evt) {
+//   const like = evt.target;
+//   like.classList.toggle('card__like_liked');
+// }
 
 /***events***/
 popupClose.addEventListener('click', () => {closePopup(popupUser);});
@@ -161,14 +158,21 @@ popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
 popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
-
-/***start***/
-//renderInitialCards();
-
 import {Card} from './Card.js';
 
-initialCards.forEach( item => {
-  const newCard = new Card(item,'#card-template');
+function renderInitialCards() {
+  initialCards.forEach( item => {
+    const newCard = new Card(item,'#card-template');
+    const cardElement = newCard.generateCard();
+    cardList.append(cardElement);
+  });
+}
+
+function addCard(cardName, cardLink) {
+  const newCard = new Card({name: cardName, link: cardLink},'#card-template');
   const cardElement = newCard.generateCard();
-  cardList.append(cardElement);
-});
+  cardList.prepend(cardElement);
+}
+
+/***start***/
+renderInitialCards();
