@@ -1,3 +1,7 @@
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+import {initialCards} from './data.js';
+
 /*popup user*/
 const popupUser = document.querySelector('.popup_type_user');
 const popupName = popupUser.querySelector('.popup__input_type_name');
@@ -27,6 +31,15 @@ const popupCaption = popupImage.querySelector('.popup__caption');
 const popupCloseImage = popupImage.querySelector('.popup__close');
 /****/
 const popupList = document.querySelectorAll('.popup');
+
+const setting = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
 /***открытие-закрытие модальных окон***/
 function openPopup(modal) {
@@ -58,6 +71,18 @@ function closeByEsc(event) {
   }
 }
 
+/* при открытии попапа убираем сообщения */
+function checkPopupValid(modal) {
+  const formElement = modal.querySelector(setting.formSelector);
+  const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
+  inputList.forEach((inputElement) => {
+    const formError = formElement.querySelector(`#${inputElement.id}-error`);
+    inputElement.classList.remove(setting.inputErrorClass);
+    formError.classList.remove(setting.errorClass);
+    formError.textContent = '';
+  });
+}
+
 /*удаление обработчиков окна*/
 function removeListenerPopup(popupItem){
   popupItem.removeEventListener('click', closeByClickOverlay);
@@ -68,7 +93,7 @@ function removeListenerPopup(popupItem){
 function openPopupUser() {
   popupName.value = profileName.textContent;
   popupBio.value = profileBio.textContent;
-  // checkPopupValid(popupUser);
+  checkPopupValid(popupUser);
   const formElement = popupUser.querySelector('.popup__form');
   console.log("openPopupUser -> formElement", formElement)
   openPopup(popupUser);
@@ -81,51 +106,12 @@ function saveProfile (evt) {
   closePopup(popupUser);
 }
 
-/***popup cards***/
-
-/*загрузка карточек*/
-// function renderInitialCards() {
-//   initialCards.forEach( item => {
-//     const newCard = createCard(item.name, item.link);
-//     cardList.append(newCard);
-//   });
-// }
-
-// /*создание карточки*/
-// function createCard(cardName, cardLink) {
-//   const cardTemplate = document.querySelector('#card-template').content;
-
-//   const newCard = cardTemplate.cloneNode(true);
-
-//   const cardTitle = newCard.querySelector('.card__title');
-//   cardTitle.textContent = cardName;
-
-//   const cardImage = newCard.querySelector('.card__image');
-//   cardImage.src = cardLink;
-//   cardImage.alt = cardName;
-
-//   cardImage.addEventListener('click', openPopupImage);
-
-//   const deleteButton = newCard.querySelector('.card__delete');
-//   deleteButton.addEventListener('click', deleteCard);
-
-//   const likeButton = newCard.querySelector('.card__like');
-//   likeButton.addEventListener('click', likeImage);
-
-//   return newCard;
-// }
-
 function openPopupAddCard() {
   popupPlace.value = '';
   popupLink.value = '';
-  //checkPopupValid(popupCard);
+  checkPopupValid(popupCard);
   openPopup(popupCard);
 }
-
-// function deleteCard(evt) {
-//   evt.target.removeEventListener('click', deleteCard);
-//   evt.target.closest('.card').remove();
-// }
 
 function saveNewCard (evt) {
   evt.preventDefault();
@@ -143,12 +129,6 @@ export function openPopupImage(cardName, cardLink) {
   openPopup(popupImage);
 }
 
-/***likes***/
-// function likeImage(evt) {
-//   const like = evt.target;
-//   like.classList.toggle('card__like_liked');
-// }
-
 /***events***/
 popupClose.addEventListener('click', () => {closePopup(popupUser);});
 editButton.addEventListener('click', openPopupUser);
@@ -158,7 +138,6 @@ popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
 popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
-import {Card} from './Card.js';
 
 function renderInitialCards() {
   initialCards.forEach( item => {
@@ -174,5 +153,14 @@ function addCard(cardName, cardLink) {
   cardList.prepend(cardElement);
 }
 
+function initialValidator() {
+  const formList = Array.from(document.querySelectorAll(setting.formSelector));
+  formList.forEach((formElement) => {
+    const newForm = new FormValidator(setting, formElement);
+    newForm.enableValidation();
+  });
+}
+
 /***start***/
 renderInitialCards();
+initialValidator();

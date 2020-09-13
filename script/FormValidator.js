@@ -1,13 +1,4 @@
-const setting = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-class FormValidator {
+export class FormValidator {
 
   constructor(setting, formElement) {
     this._formElement = formElement;
@@ -85,10 +76,3 @@ class FormValidator {
     this._setEventListeners();
   }
 }
-
-
-const formList = Array.from(document.querySelectorAll(setting.formSelector));
-formList.forEach((formElement) => {
-  const newForm = new FormValidator(setting, formElement);
-  newForm.enableValidation();
-});
