@@ -71,7 +71,7 @@ function closeByEsc(event) {
   }
 }
 
-/* при открытии попапа убираем сообщения */
+/* при открытии попапа убираем сообщения об ошибках*/
 function checkPopupValid(modal) {
   const formElement = modal.querySelector(setting.formSelector);
   const inputList = Array.from(formElement.querySelectorAll(setting.inputSelector));
@@ -94,8 +94,6 @@ function openPopupUser() {
   popupName.value = profileName.textContent;
   popupBio.value = profileBio.textContent;
   checkPopupValid(popupUser);
-  const formElement = popupUser.querySelector('.popup__form');
-  console.log("openPopupUser -> formElement", formElement)
   openPopup(popupUser);
 }
 
