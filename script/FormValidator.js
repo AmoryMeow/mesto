@@ -48,7 +48,15 @@ export class FormValidator {
     }
   }
 
-  _resetForm = (inputList) => {
+  resetForm = (inputList = null, buttonElement = null) => {
+    if (!inputList) {
+      inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    }
+    if (!buttonElement) {
+      buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    }
+    this._toggleButton(inputList,buttonElement);
+
     inputList.forEach( (inputElement) => {
       this._hideErrorMessage(inputElement);
     })
@@ -57,8 +65,7 @@ export class FormValidator {
   _setEventListeners = () => {
     const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
     const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
-    this._toggleButton(inputList,buttonElement);
-    this._resetForm(inputList);
+    this.resetForm(inputList,buttonElement);
 
     inputList.forEach( (inputElement) => {
       inputElement.addEventListener('input', () => {
@@ -67,6 +74,11 @@ export class FormValidator {
       });
     });
 
+  }
+
+  checkFormValid = (formElement) => {
+    console.log("FormValidator -> checkPopupValid -> formElement", formElement)
+    return "123";
   }
 
   enableValidation = () => {

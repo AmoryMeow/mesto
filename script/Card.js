@@ -1,4 +1,4 @@
-import {openPopupImage} from './index.js';
+import {openPopupImage} from './utils.js';
 
 export class Card {
   constructor(data, selectorTemplate) {
@@ -16,8 +16,9 @@ export class Card {
 
   generateCard() {
       this._element = this._getTemplate();
-      this._element.querySelector('.card__image').src = this._link;
-      this._element.querySelector('.card__image').alt = this._name;
+      const cardImage = this._element.querySelector('.card__image');
+      cardImage.src = this._link;
+      cardImage.alt = this._name;
       this._element.querySelector('.card__title').textContent = this._name;
       this._setEventListener();
       return this._element;
@@ -26,6 +27,7 @@ export class Card {
    _deleteCard = () => {
     this._removeEventListener();
     this._element.remove();
+    this._element = null;
    }
 
    _likeCard = () => {
