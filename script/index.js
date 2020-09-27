@@ -1,3 +1,4 @@
+import {Section} from './Section.js';
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 import {initialCards} from './data.js';
@@ -84,10 +85,10 @@ function addCard(cardName, cardLink) {
 
 /***start***/
 /*загрузка карточек*/
-initialCards.forEach( item => {
-  const cardElement = createCard(item);
-  cardList.append(cardElement);
-});
+// initialCards.forEach( item => {
+//   const cardElement = createCard(item);
+//   cardList.append(cardElement);
+//});
 
 /*подключение валидации*/
 const userFormValidator = new FormValidator(setting, popupUser.querySelector(setting.formSelector));
@@ -95,3 +96,16 @@ const cardFormValidador = new FormValidator(setting, popupCard.querySelector(set
 
 userFormValidator.enableValidation();
 cardFormValidador.enableValidation();
+
+const cardContainer = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const newCard = new Card(item,'#card-template');
+    const cardElement = newCard.generateCard();
+    cardContainer.addItem(cardElement);
+    }
+  },
+  '.cards'
+);
+
+cardContainer.renderItems();
