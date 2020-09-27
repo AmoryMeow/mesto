@@ -1,8 +1,18 @@
 import {Section} from './Section.js';
 import {Card} from './Card.js';
+import {UserInfo} from './UserInfo.js';
 import {FormValidator} from './FormValidator.js';
-import {initialCards} from './data.js';
-import {closePopup,openPopup,popupCloseImage,popupImage} from './utils.js';
+import {
+  initialCards,
+  cardContainerSelector,
+  setting,
+  userNameSelector,
+  userBioSelector,
+  popupImageSelector
+} from './data.js';
+//import {closePopup,openPopup,popupCloseImage,popupImage} from './utils.js';
+import {Popup} from './Popup.js';
+import { PopupWithImage } from './PopupWithImage.js';
 
 /*popup user*/
 const popupUser = document.querySelector('.popup_type_user');
@@ -26,14 +36,7 @@ const addButton = document.querySelector('.profile__add-button');
 const popupCloseAddCard = popupCard.querySelector('.popup__close');
 const formAddCard = popupCard.querySelector('.popup__form');
 
-const setting = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+
 
 /***popup user***/
 function openPopupUser() {
@@ -70,7 +73,7 @@ formElement.addEventListener('submit', saveProfile);
 addButton.addEventListener('click', openPopupAddCard);
 popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
-popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
+//popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
 function createCard(item) {
   const newCard = new Card(item,'#card-template');
@@ -97,15 +100,24 @@ const cardFormValidador = new FormValidator(setting, popupCard.querySelector(set
 userFormValidator.enableValidation();
 cardFormValidador.enableValidation();
 
+const userInfo = new UserInfo(userNameSelector, userBioSelector);
+const popupImage = new PopupWithImage(popupImageSelector);
+popupImage.setEventListeners();
+
 const cardContainer = new Section({
   items: initialCards,
   renderer: (item) => {
-    const newCard = new Card(item,'#card-template');
+    const newCard = new Card({
+      data: item,
+      handleCardClick: () => {
+        popupImage.open({name: newCard._name, link: newCard._link});
+      }
+    },'#card-template');
     const cardElement = newCard.generateCard();
     cardContainer.addItem(cardElement);
     }
   },
-  '.cards'
+  cardContainerSelector
 );
 
 cardContainer.renderItems();

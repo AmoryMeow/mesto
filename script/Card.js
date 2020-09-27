@@ -1,10 +1,9 @@
-import {openPopupImage} from './utils.js';
-
 export class Card {
-  constructor(data, selectorTemplate) {
+  constructor({data,handleCardClick}, selectorTemplate) {
     this._name = data.name;
     this._link = data.link;
     this._selectorTemplate = selectorTemplate;
+    this._handleCardClick = handleCardClick;//функция должна открывать попап с картинкой при клике на карточку.
   }
 
   _getTemplate() {
@@ -41,12 +40,12 @@ export class Card {
    _setEventListener = () => {
       this._element.querySelector('.card__delete').addEventListener('click', this._deleteCard);
       this._element.querySelector('.card__like').addEventListener('click', this._likeCard);
-      this._element.querySelector('.card__image').addEventListener('click', this._openPopup);
+      this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick());
    }
 
    _removeEventListener = () => {
     this._element.querySelector('.card__delete').removeEventListener('click', this._deleteCard);
     this._element.querySelector('.card__like').removeEventListener('click', this._likeCard);
-    this._element.querySelector('.card__image').removeEventListener('click', this._openPopup);
+    this._element.querySelector('.card__image').removeEventListener('click', () => this._handleCardClick());
    }
 }
