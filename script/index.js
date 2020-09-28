@@ -8,11 +8,13 @@ import {
   setting,
   userNameSelector,
   userBioSelector,
-  popupImageSelector
+  popupImageSelector,
+  popupUserInfoSelector
 } from './data.js';
 //import {closePopup,openPopup,popupCloseImage,popupImage} from './utils.js';
 import {Popup} from './Popup.js';
 import { PopupWithImage } from './PopupWithImage.js';
+import { PopupWithForm } from './PopupWithForm.js';
 
 /*popup user*/
 const popupUser = document.querySelector('.popup_type_user');
@@ -46,12 +48,12 @@ function openPopupUser() {
   openPopup(popupUser);
 }
 
-function saveProfile (evt) {
-  evt.preventDefault();
-  profileName.textContent = popupName.value;
-  profileBio.textContent = popupBio.value;
-  closePopup(popupUser);
-}
+// function saveProfile (evt) {
+//   evt.preventDefault();
+//   profileName.textContent = popupName.value;
+//   profileBio.textContent = popupBio.value;
+//   closePopup(popupUser);
+// }
 
 function openPopupAddCard() {
   popupPlace.value = '';
@@ -67,24 +69,24 @@ function saveNewCard (evt) {
 };
 
 /***events***/
-popupClose.addEventListener('click', () => {closePopup(popupUser);});
-editButton.addEventListener('click', openPopupUser);
-formElement.addEventListener('submit', saveProfile);
+//popupClose.addEventListener('click', () => {closePopup(popupUser);});
+//editButton.addEventListener('click', openPopupUser);
+//formElement.addEventListener('submit', saveProfile);
 addButton.addEventListener('click', openPopupAddCard);
 popupCloseAddCard.addEventListener('click', () => {closePopup(popupCard);});
 formAddCard.addEventListener('submit', saveNewCard);
 //popupCloseImage.addEventListener('click', () => {closePopup(popupImage);});
 
-function createCard(item) {
-  const newCard = new Card(item,'#card-template');
-  const cardElement = newCard.generateCard();
-  return cardElement;
-}
+//function createCard(item) {
+//   const newCard = new Card(item,'#card-template');
+//   const cardElement = newCard.generateCard();
+//   return cardElement;
+// }
 
-function addCard(cardName, cardLink) {
-  const cardElement = createCard({name: cardName, link: cardLink});
-  cardList.prepend(cardElement);
-}
+// function addCard(cardName, cardLink) {
+//   const cardElement = createCard({name: cardName, link: cardLink});
+//   cardList.prepend(cardElement);
+// }
 
 /***start***/
 /*загрузка карточек*/
@@ -101,8 +103,21 @@ userFormValidator.enableValidation();
 cardFormValidador.enableValidation();
 
 const userInfo = new UserInfo(userNameSelector, userBioSelector);
+const popupUserInfo = new PopupWithForm(
+  popupUserInfoSelector,
+  (data) => {
+    userInfo.setUserInfo(data);
+  }
+);
+popupUserInfo.setEventListeners();
+editButton.addEventListener('click', () => {
+  popupUserInfo.open(userInfo.getUserInfo());
+  userFormValidator.resetForm();
+});
+
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
+
 
 const cardContainer = new Section({
   items: initialCards,
