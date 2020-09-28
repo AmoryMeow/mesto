@@ -1,8 +1,8 @@
 import {Popup} from './Popup.js';
-import {setting} from './data.js';
+import {setting} from '../utils/data.js';
 
 export class PopupWithForm extends Popup {
-  constructor(popupSelector, submitForm) {
+  constructor({popupSelector, submitForm}) {
     super(popupSelector);
     //колбэк сабмита формы
     this._submitForm = submitForm;
@@ -40,5 +40,9 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     //при закрытии попапа форма должна ещё и сбрасываться
+    const inputList =  Array.from(this._element.querySelectorAll(setting.inputSelector));
+    inputList.forEach( (input) => {
+      input.value = '';
+    })
   }
 }

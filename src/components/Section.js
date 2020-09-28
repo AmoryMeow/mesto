@@ -11,7 +11,11 @@ export class Section {
     });
   }
 
-  addItem(element) {
-    this._container.append(element);
+  addItem(element, append = true) {
+    if (append) {
+      this._container.append(element);
+    } else {
+      this._container.prepend(element);
+    }
   }
 }
