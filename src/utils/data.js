@@ -41,3 +41,17 @@ export const setting = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+/* импорт картинок */
+import logoWhiteSvg from '../images/logo-white.svg';
+import logoBlackSvg from '../images/logo-black.svg';
+import avatarJpg from '../images/avatar.jpg';
+import deleteButtonSvg from '../images/delete-button.svg';
+import deleteButtonHoverSvg from '../images/delete-button-hover.svg';
+import addButtonSvg from '../images/add-button.svg';
+import addButtonHoverSvg from '../images/add-button-hover.svg';
+import editButtonSvg from '../images/edit-button.svg';
+import editButtonHoverSvg from '../images/edit-button-hover.svg';
+import likeClickSvg from '../images/like-click.svg';
+import likeHoverSvg from '../images/like-hover.svg';
+import likeSvg from '../images/like.svg';

@@ -15,7 +15,6 @@ import {
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 
-
 const popupUser = document.querySelector('.popup_type_user');
 const popupCard = document.querySelector('.popup_type_card');
 const editButton = document.querySelector('.profile__edit-button');
