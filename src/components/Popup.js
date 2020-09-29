@@ -20,12 +20,12 @@ export class Popup {
   }
   open() {
     this._element.classList.add('popup_opened');
-    this._element.addEventListener('mousedown', (event) => {this._handleOverlayClick(event)});
-    document.addEventListener('keydown', (event) => {this._handleEscClose(event)});
+    this._element.addEventListener('mousedown', this._handleOverlayClick.bind(this));
+    document.addEventListener('keydown', this._handleEscClose.bind(this));
   }
   close() {
     this._element.classList.remove('popup_opened');
-    this._element.removeEventListener('mousedown', (event) => {this._handleOverlayClick(event)});
-    document.removeEventListener('keydown', (event) => {this._handleEscClose(event)});
+    this._element.removeEventListener('mousedown', this._handleOverlayClick.bind(this));
+    document.removeEventListener('keydown', this._handleEscClose.bind(this));
   }
 }

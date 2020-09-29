@@ -29,16 +29,22 @@ userFormValidator.enableValidation();
 cardFormValidador.enableValidation();
 
 /* генерация карточек */
+function createCard(nameValue, linkValue) {
+  const item = {name: nameValue, link: linkValue};
+  const newCard = new Card({
+    data: item,
+    handleCardClick: (item) => {
+      popupImage.open(item);
+    }
+  },'#card-template');
+  const cardElement = newCard.generateCard();
+  return cardElement;
+}
+
 const cardContainer = new Section({
   items: initialCards,
   renderer: (item) => {
-    const newCard = new Card({
-      data: item,
-      handleCardClick: () => {
-        popupImage.open({name: newCard._name, link: newCard._link});
-      }
-    },'#card-template');
-    const cardElement = newCard.generateCard();
+    const cardElement = createCard(item.name, item.link);
     cardContainer.addItem(cardElement);
     }
   },
@@ -54,6 +60,7 @@ const popupUserInfo = new PopupWithForm(
     popupSelector: popupUserInfoSelector,
     submitForm: (data) => {
       userInfo.setUserInfo(data);
+      popupUserInfo.close();
     }
   }
 );
@@ -68,14 +75,9 @@ const popupAddCard = new PopupWithForm(
   {
     popupSelector: popupAddCardSelector,
     submitForm: (item) => {
-    const newCard = new Card({
-      data: {name: item.place, link: item.link},
-      handleCardClick: () => {
-        popupImage.open({name: newCard._name, link: newCard._link});
-      }
-    },'#card-template');
-    const cardElement = newCard.generateCard();
-    cardContainer.addItem(cardElement,false);
+      const cardElement = createCard(item.place,item.link);
+      cardContainer.addItem(cardElement,false);
+      popupAddCard.close();
     }
   }
 );

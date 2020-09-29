@@ -11,7 +11,7 @@ export class PopupWithForm extends Popup {
   _getInputValues() {
     //собирает данные всех полей формы.
     const inputList =  Array.from(this._element.querySelectorAll(setting.inputSelector));
-    let data = {};
+    const data = {};
     inputList.forEach( input => {
       data[input.name] = input.value;
     });
@@ -24,7 +24,6 @@ export class PopupWithForm extends Popup {
     this._element.addEventListener('submit', (evt) =>{
       evt.preventDefault();
       this._submitForm(this._getInputValues());
-      this.close();
     })
   }
 
@@ -40,9 +39,7 @@ export class PopupWithForm extends Popup {
   close() {
     super.close();
     //при закрытии попапа форма должна ещё и сбрасываться
-    const inputList =  Array.from(this._element.querySelectorAll(setting.inputSelector));
-    inputList.forEach( (input) => {
-      input.value = '';
-    })
+    const popupForm = this._element.querySelector(setting.formSelector);
+    popupForm.reset();
   }
 }
