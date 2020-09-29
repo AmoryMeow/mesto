@@ -23,29 +23,29 @@ export class Card {
       return this._element;
    }
 
-  _deleteCard = () => {
+  _deleteCard() {
     this._removeEventListener();
     this._element.remove();
     this._element = null;
    }
 
-  _likeCard = () => {
+  _likeCard() {
     this._element.querySelector('.card__like').classList.toggle('card__like_liked');
    }
 
-  _openPopup = () => {
+  _openPopup() {
     openPopupImage(this._name,this._link);
    }
 
-  _setEventListener = () => {
-      this._element.querySelector('.card__delete').addEventListener('click', this._deleteCard);
-      this._element.querySelector('.card__like').addEventListener('click', this._likeCard);
+  _setEventListener() {
+      this._element.querySelector('.card__delete').addEventListener('click', () => this._deleteCard());
+      this._element.querySelector('.card__like').addEventListener('click', () => this._likeCard());
       this._element.querySelector('.card__image').addEventListener('click', () => this._handleCardClick());
    }
 
-   _removeEventListener = () => {
-    this._element.querySelector('.card__delete').removeEventListener('click', this._deleteCard);
-    this._element.querySelector('.card__like').removeEventListener('click', this._likeCard);
+   _removeEventListener() {
+    this._element.querySelector('.card__delete').removeEventListener('click', () => this._deleteCard());
+    this._element.querySelector('.card__like').removeEventListener('click', () => this._likeCard());
     this._element.querySelector('.card__image').removeEventListener('click', () => this._handleCardClick());
    }
 }
