@@ -17,13 +17,15 @@ export class Popup {
   setEventListeners(){
     //добавляет слушатель клика иконке закрытия попапа
     this._element.querySelector('.popup__close').addEventListener('click', () => {this.close()});
-    this._element.addEventListener('mousedown', (event) => {this._handleOverlayClick(event)});
-    document.addEventListener('keydown', (event) => {this._handleEscClose(event)});
   }
   open() {
     this._element.classList.add('popup_opened');
+    this._element.addEventListener('mousedown', (event) => {this._handleOverlayClick(event)});
+    document.addEventListener('keydown', (event) => {this._handleEscClose(event)});
   }
   close() {
     this._element.classList.remove('popup_opened');
+    this._element.removeEventListener('mousedown', (event) => {this._handleOverlayClick(event)});
+    document.removeEventListener('keydown', (event) => {this._handleEscClose(event)});
   }
 }
