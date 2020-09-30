@@ -1,6 +1,8 @@
 export class Popup {
   constructor(popupSelector) {
     this._element = document.querySelector(popupSelector);
+    this._handleEscClose = this._handleEscClose.bind(this);
+    this._handleOverlayClick = this._handleOverlayClick.bind(this);
   }
   _handleEscClose(event) {
     //содержит логику закрытия попапа клавишей Esc
@@ -20,12 +22,12 @@ export class Popup {
   }
   open() {
     this._element.classList.add('popup_opened');
-    this._element.addEventListener('mousedown', this._handleOverlayClick.bind(this));
-    document.addEventListener('keydown', this._handleEscClose.bind(this));
+    this._element.addEventListener('mousedown', this._handleOverlayClick);
+    document.addEventListener('keydown', this._handleEscClose);
   }
   close() {
     this._element.classList.remove('popup_opened');
-    this._element.removeEventListener('mousedown', this._handleOverlayClick.bind(this));
-    document.removeEventListener('keydown', this._handleEscClose.bind(this));
+    this._element.removeEventListener('mousedown', this._handleOverlayClick);
+    document.removeEventListener('keydown', this._handleEscClose);
   }
 }
