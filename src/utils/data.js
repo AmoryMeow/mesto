@@ -29,9 +29,11 @@ export const initialCards = [
 export const cardContainerSelector = '.cards';
 export const userNameSelector = '.profile__name';
 export const userBioSelector = '.profile__bio';
+export const avatarSelector = '.profile__image';
 export const popupImageSelector = '.popup_type_image';
 export const popupUserInfoSelector = '.popup_type_user';
 export const popupAddCardSelector = '.popup_type_card';
+export const popupUserAvatarSelector = '.popup_type_avatar';
 
 export const setting = {
   formSelector: '.popup__form',
@@ -41,6 +43,8 @@ export const setting = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+export const token = 'b3f5bad4-676e-42da-8be0-421a5a571e47';
 
 /* импорт картинок */
 import logoWhiteSvg from '../images/logo-white.svg';

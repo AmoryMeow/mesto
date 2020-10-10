@@ -2,12 +2,10 @@
   border-radius: 50%;
   height: 127.5px;
   width: 127.5px;
-  background-image: url('../../../images/avatar.jpg');
-  background-position: center;
-  background-size: contain;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .profile__avatar:hover::after {

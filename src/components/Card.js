@@ -2,6 +2,7 @@ export class Card {
   constructor({data,handleCardClick}, selectorTemplate) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes.length;
     this._selectorTemplate = selectorTemplate;
     this._handleCardClick = handleCardClick;//функция должна открывать попап с картинкой при клике на карточку.
   }
@@ -19,6 +20,8 @@ export class Card {
       cardImage.src = this._link;
       cardImage.alt = this._name;
       this._element.querySelector('.card__title').textContent = this._name;
+      this._element.querySelector('.card__like-count').textContent = this._likes;
+
       this._setEventListener();
       return this._element;
    }
