@@ -4,3 +4,7 @@
   flex-direction: column;
   margin: 17px 0;
 }
+
+.popup__field:first-of-type {
+  margin-top: 24px;
+}
