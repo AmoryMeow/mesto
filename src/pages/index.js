@@ -22,6 +22,7 @@ import {
   popupUserInfoSelector,
   popupAddCardSelector,
   popupUserAvatarSelector,
+  popupConfirmSelector,
   token
 } from '../utils/data.js';
 import {
@@ -33,6 +34,9 @@ import {
 import {
   Api
 } from '../components/Api.js';
+import {
+  PopupWithConfirm
+} from '../components/PopupWithConfirm';
 
 const popupUser = document.querySelector('.popup_type_user');
 const popupCard = document.querySelector('.popup_type_card');
@@ -59,6 +63,20 @@ const api = new Api({
   }
 });
 
+const popupConfirm = new PopupWithConfirm({
+  popupSelector: popupConfirmSelector,
+  submitForm: (item) => {
+
+    api.deleteCard(item)
+      .then(() => {
+        item.deleteCard();
+        popupConfirm.close();
+      });
+
+  }
+});
+popupConfirm.setEventListeners();
+
 /* генерация карточек */
 function createCard(item, myID) {
   const newCard = new Card({
@@ -67,12 +85,13 @@ function createCard(item, myID) {
       popupImage.open(item);
     },
     handleDeleteCard: (item) => {
-      console.log(item);
-      api.deleteCard(item)
-        .then(() => {
-          item._removeEventListener();//???????
-          item._element.remove();
-          item._element = null;
+      popupConfirm.open(item);
+    },
+    handleLikeClick: (item) => {
+      api.likeCard(item)
+        .then((data) => {
+          console.log("createCard -> data", data)
+
         })
     },
     myID
@@ -102,6 +121,7 @@ api.getAllData().then(
         popupUserInfo.close();
       }
     });
+
     popupUserInfo.setEventListeners();
     editButton.addEventListener('click', () => {
       popupUserInfo.open(userInfo.getUserInfo());
@@ -112,7 +132,7 @@ api.getAllData().then(
     const popupUserAvatar = new PopupWithForm({
       popupSelector: popupUserAvatarSelector,
       submitForm: (data) => {
-        console.log('submitForm data ', data);
+        console.log('submitForm data ', data); //????
       }
     });
     editAvatarButton.addEventListener('click', () => {
@@ -120,7 +140,6 @@ api.getAllData().then(
       userAvatarFormValidador.resetForm();
     });
     popupUserAvatar.setEventListeners();
-
 
     /*карточки */
     const cardContainer = new Section({
@@ -150,11 +169,13 @@ api.getAllData().then(
           });
       }
     });
+
     popupAddCard.setEventListeners();
     addButton.addEventListener('click', () => {
       popupAddCard.open();
       cardFormValidador.resetForm();
     });
+
   }
 )
 

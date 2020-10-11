@@ -22,6 +22,5 @@ export class UserInfo {
     this._about.textContent = data.about;
     this._avatar.src = data.avatar;
     this._id = data._id;
-    console.log("UserInfo -> setUserInfo -> data._id", data._id)
   }
 }

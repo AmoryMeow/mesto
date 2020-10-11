@@ -85,6 +85,21 @@ export class Api {
     .catch((err) => console.log(err));
   }
 
+  likeCard(item) {
+    return fetch(`${this._baseUrl}/cards/likes/${item._id}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then((res) => {
+      console.log("res", res)
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка: ${res.status} ${res.statusText}`);
+    })
+    .catch((err) => console.log(err));
+  }
+
   getAllData() {
     return Promise.all([this.getProfile(), this.getInitialCards()]);
   }
