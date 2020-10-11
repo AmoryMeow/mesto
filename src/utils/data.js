@@ -28,7 +28,7 @@ export const initialCards = [
 
 export const cardContainerSelector = '.cards';
 export const userNameSelector = '.profile__name';
-export const userBioSelector = '.profile__bio';
+export const userAboutSelector = '.profile__about';
 export const avatarSelector = '.profile__image';
 export const popupImageSelector = '.popup_type_image';
 export const popupUserInfoSelector = '.popup_type_user';

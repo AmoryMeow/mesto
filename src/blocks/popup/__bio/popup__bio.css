@@ -1,4 +1,4 @@
-.popup__bio {
+.popup__about {
   height: 57px;
   width: 100%;
   border: none;
@@ -8,6 +8,6 @@
   line-height: 17px;
 }
 
-.popup__bio:focus {
+.popup__about:focus {
   outline: none;
 }

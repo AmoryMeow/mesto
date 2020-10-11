@@ -1,10 +1,15 @@
 export class Card {
-  constructor({data,handleCardClick}, selectorTemplate) {
+  constructor({data,handleCardClick, handleDeleteCard, myID}, selectorTemplate) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
+    this._myCard = data.owner._id === myID;
+    this._id = data._id;
+
     this._selectorTemplate = selectorTemplate;
+
     this._handleCardClick = handleCardClick;//функция должна открывать попап с картинкой при клике на карточку.
+    this._handleDeleteCard = handleDeleteCard;
   }
 
   _getTemplate() {
@@ -22,14 +27,18 @@ export class Card {
       this._element.querySelector('.card__title').textContent = this._name;
       this._element.querySelector('.card__like-count').textContent = this._likes;
 
+      if (!this._myCard) {
+        this._element.querySelector('.card__delete').classList.add('card__delete_disable');
+      }
       this._setEventListener();
       return this._element;
    }
 
   _deleteCard() {
-    this._removeEventListener();
-    this._element.remove();
-    this._element = null;
+    // this._removeEventListener();
+    // this._element.remove();
+    // this._element = null;
+    this._handleDeleteCard(this);
    }
 
   _likeCard() {

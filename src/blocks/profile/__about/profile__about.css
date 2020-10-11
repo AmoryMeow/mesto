@@ -1,4 +1,4 @@
-.profile__bio {
+.profile__about {
   margin: 0;
   font-size: 18px;
   line-height: 22px;
@@ -12,13 +12,13 @@
 }
 
 @media (max-width: 882px) {
-  .profile__bio {
+  .profile__about {
     text-align: center;
   }
 }
 
 @media (max-width: 582px) {
-  .profile__bio {
+  .profile__about {
     max-width: calc(100vw - 38px);
   }
 }
