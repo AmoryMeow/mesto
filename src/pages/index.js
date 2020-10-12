@@ -88,11 +88,17 @@ function createCard(item, myID) {
       popupConfirm.open(item);
     },
     handleLikeClick: (item) => {
-      api.likeCard(item)
-        .then((data) => {
-          console.log("createCard -> data", data)
-
-        })
+      if (item._liked) {
+        api.deleteLikeCard(item)
+          .then((data) => {
+            item.likeCard(data);
+          })
+      } else {
+        api.likeCard(item)
+          .then((data) => {
+            item.likeCard(data);
+          })
+      }
     },
     myID
   }, '#card-template');
@@ -132,7 +138,13 @@ api.getAllData().then(
     const popupUserAvatar = new PopupWithForm({
       popupSelector: popupUserAvatarSelector,
       submitForm: (data) => {
-        console.log('submitForm data ', data); //????
+
+        api.changePhoto(data)
+          .then((profile) => {
+            console.log(profile);
+            userInfo.setUserInfo(profile);
+          })
+        popupUserAvatar.close();
       }
     });
     editAvatarButton.addEventListener('click', () => {

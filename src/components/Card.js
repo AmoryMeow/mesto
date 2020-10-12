@@ -9,6 +9,10 @@ export class Card {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes.length;
+    this._liked = data.likes.some((like) => {
+      return like._id === myID;
+    })
+
     this._myCard = data.owner._id === myID;
     this._id = data._id;
 
@@ -17,6 +21,7 @@ export class Card {
     this._handleCardClick = handleCardClick.bind(this); //функция должна открывать попап с картинкой при клике на карточку.
     this._handleDeleteCard = handleDeleteCard.bind(this);
     this._handleLikeClick = handleLikeClick;
+
   }
 
   _getTemplate() {
@@ -38,6 +43,7 @@ export class Card {
       this._element.querySelector('.card__delete').classList.add('card__delete_disable');
     }
     this._setEventListener();
+    this._updateDisplayLike();
     return this._element;
   }
 
@@ -47,9 +53,19 @@ export class Card {
     this._element = null;
   }
 
-  _likeCard() {
-    this._handleLikeClick(this);
-    this._element.querySelector('.card__like').classList.toggle('card__like_liked');
+  likeCard(data) {
+    this._likes = data.likes.length;
+    this._liked = !this._liked;
+    this._updateDisplayLike();
+  }
+
+  _updateDisplayLike() {
+    this._element.querySelector('.card__like-count').textContent = this._likes;
+    if (this._liked) {
+      this._element.querySelector('.card__like').classList.add('card__like_liked');
+    } else {
+      this._element.querySelector('.card__like').classList.remove('card__like_liked');
+    }
   }
 
   _openPopup() {
@@ -58,7 +74,7 @@ export class Card {
 
   _setEventListener() {
     this._element.querySelector('.card__delete').addEventListener('click', () => this._handleDeleteCard(this));
-    this._element.querySelector('.card__like').addEventListener('click', () => this._likeCard());
+    this._element.querySelector('.card__like').addEventListener('click', () => this._handleLikeClick(this));
     this._element.querySelector('.card__image').addEventListener('click', () => {
       this._handleCardClick({
         name: this._name,
@@ -69,7 +85,7 @@ export class Card {
 
   _removeEventListener() {
     this._element.querySelector('.card__delete').removeEventListener('click', () => this._handleDeleteCard(this));
-    this._element.querySelector('.card__like').removeEventListener('click', () => this._likeCard());
+    this._element.querySelector('.card__like').removeEventListener('click', () => this._handleLikeClick(this));
     this._element.querySelector('.card__image').removeEventListener('click', () => this._handleCardClick());
   }
 }
