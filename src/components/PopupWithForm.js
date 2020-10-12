@@ -42,4 +42,13 @@ export class PopupWithForm extends Popup {
     const popupForm = this._element.querySelector(setting.formSelector);
     popupForm.reset();
   }
+
+  waitServer(isWait) {
+    if (isWait) {
+      this._element.querySelector('.popup__button').textContent = 'Сохранение...';
+    } else {
+      this._element.querySelector('.popup__button').textContent = 'Сохранить';
+    }
+  }
+
 }

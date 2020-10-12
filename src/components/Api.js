@@ -27,8 +27,7 @@ export class Api {
           name: data.name,
           about: data.about
         })
-      })
-      .then((res) => {
+      }).then((res) => {
         console.log("res", res)
         if (res.ok) {
           return res.json();

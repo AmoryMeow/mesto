@@ -24,4 +24,12 @@ export class PopupWithConfirm extends Popup {
   close() {
     super.close();
   }
+
+  waitServer(isWait) {
+    if (isWait) {
+      this._element.querySelector('.popup__button').textContent = 'Удаление...';
+    } else {
+      this._element.querySelector('.popup__button').textContent = 'Да';
+    }
+  }
 }

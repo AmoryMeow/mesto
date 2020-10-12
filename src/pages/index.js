@@ -45,15 +45,6 @@ const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const editAvatarButton = document.querySelector('.profile__avatar');
 
-/*подключение валидации*/
-const userFormValidator = new FormValidator(setting, popupUser.querySelector(setting.formSelector));
-const cardFormValidador = new FormValidator(setting, popupCard.querySelector(setting.formSelector));
-const userAvatarFormValidador = new FormValidator(setting, popupAvatar.querySelector(setting.formSelector));
-
-userFormValidator.enableValidation();
-cardFormValidador.enableValidation();
-userAvatarFormValidador.enableValidation();
-
 /*api*/
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-16',
@@ -67,11 +58,14 @@ const popupConfirm = new PopupWithConfirm({
   popupSelector: popupConfirmSelector,
   submitForm: (item) => {
 
+    popupConfirm.waitServer(true);
+
     api.deleteCard(item)
       .then(() => {
         item.deleteCard();
         popupConfirm.close();
-      });
+      })
+      .finally(() => popupConfirm.waitServer(false));
 
   }
 });
@@ -119,11 +113,14 @@ api.getAllData().then(
       popupSelector: popupUserInfoSelector,
       submitForm: (data) => {
 
+        popupUserInfo.waitServer(true);
+
         api.saveProfile(data)
           .then((profile) => {
             console.log("profile", profile);
             userInfo.setUserInfo(profile);
-          });
+          })
+          .finally(() => popupUserInfo.waitServer(false));
         popupUserInfo.close();
       }
     });
@@ -139,11 +136,14 @@ api.getAllData().then(
       popupSelector: popupUserAvatarSelector,
       submitForm: (data) => {
 
+        popupUserAvatar.waitServer(true);
+
         api.changePhoto(data)
           .then((profile) => {
             console.log(profile);
             userInfo.setUserInfo(profile);
           })
+          .finally(() => popupUserInfo.waitServer(false));
         popupUserAvatar.close();
       }
     });
@@ -170,6 +170,8 @@ api.getAllData().then(
       popupSelector: popupAddCardSelector,
       submitForm: (item) => {
 
+        popupAddCard.waitServer(true);
+
         api.addCard({
             name: item.place,
             link: item.link
@@ -178,7 +180,8 @@ api.getAllData().then(
             const cardElement = createCard(item, myID);
             cardContainer.addItem(cardElement, false);
             popupAddCard.close();
-          });
+          })
+          .finally(() => popupUserInfo.waitServer(false));
       }
     });
 
@@ -194,3 +197,12 @@ api.getAllData().then(
 /* картинка */
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
+
+/*подключение валидации*/
+const userFormValidator = new FormValidator(setting, popupUser.querySelector(setting.formSelector));
+const cardFormValidador = new FormValidator(setting, popupCard.querySelector(setting.formSelector));
+const userAvatarFormValidador = new FormValidator(setting, popupAvatar.querySelector(setting.formSelector));
+
+userFormValidator.enableValidation();
+cardFormValidador.enableValidation();
+userAvatarFormValidador.enableValidation();
