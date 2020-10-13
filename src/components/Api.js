@@ -28,7 +28,6 @@ export class Api {
           about: data.about
         })
       }).then((res) => {
-        console.log("res", res)
         if (res.ok) {
           return res.json();
         }
@@ -46,7 +45,6 @@ export class Api {
         })
       })
       .then((res) => {
-        console.log("res", res)
         if (res.ok) {
           return res.json();
         }
@@ -80,7 +78,6 @@ export class Api {
         })
       })
       .then((res) => {
-        console.log("res", res)
         if (res.ok) {
           return res.json();
         }
@@ -95,7 +92,6 @@ export class Api {
         headers: this._headers
       })
       .then((res) => {
-        console.log("res", res)
         if (res.ok) {
           return res.json();
         }

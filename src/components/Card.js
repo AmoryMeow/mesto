@@ -59,6 +59,9 @@ export class Card {
     this._updateDisplayLike();
   }
 
+  isLiked() {
+    return this._liked;
+  }
   _updateDisplayLike() {
     this._element.querySelector('.card__like-count').textContent = this._likes;
     if (this._liked) {

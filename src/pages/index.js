@@ -63,9 +63,11 @@ const popupConfirm = new PopupWithConfirm({
     api.deleteCard(item)
       .then(() => {
         item.deleteCard();
-        popupConfirm.close();
       })
-      .finally(() => popupConfirm.waitServer(false));
+      .finally(() => {
+        popupConfirm.waitServer(false);
+        popupConfirm.close();
+      });
 
   }
 });
@@ -82,7 +84,7 @@ function createCard(item, myID) {
       popupConfirm.open(item);
     },
     handleLikeClick: (item) => {
-      if (item._liked) {
+      if (item.isLiked()) {
         api.deleteLikeCard(item)
           .then((data) => {
             item.likeCard(data);
@@ -117,15 +119,16 @@ api.getAllData().then(
 
         api.saveProfile(data)
           .then((profile) => {
-            console.log("profile", profile);
             userInfo.setUserInfo(profile);
           })
-          .finally(() => popupUserInfo.waitServer(false));
-        popupUserInfo.close();
+          .finally(() => {
+            popupUserInfo.waitServer(false);
+            popupUserInfo.close();
+          });
+
       }
     });
 
-    popupUserInfo.setEventListeners();
     editButton.addEventListener('click', () => {
       popupUserInfo.open(userInfo.getUserInfo());
       userFormValidator.resetForm();
@@ -140,11 +143,12 @@ api.getAllData().then(
 
         api.changePhoto(data)
           .then((profile) => {
-            console.log(profile);
             userInfo.setUserInfo(profile);
           })
-          .finally(() => popupUserInfo.waitServer(false));
-        popupUserAvatar.close();
+          .finally(() => {
+            popupUserAvatar.waitServer(false);
+            popupUserAvatar.close();
+          });
       }
     });
     editAvatarButton.addEventListener('click', () => {
@@ -179,9 +183,11 @@ api.getAllData().then(
           .then((item) => {
             const cardElement = createCard(item, myID);
             cardContainer.addItem(cardElement, false);
-            popupAddCard.close();
           })
-          .finally(() => popupUserInfo.waitServer(false));
+          .finally(() => {
+            popupAddCard.waitServer(false);
+            popupAddCard.close();
+          });
       }
     });
 
