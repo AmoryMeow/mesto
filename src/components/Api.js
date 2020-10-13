@@ -128,6 +128,7 @@ export class Api {
       .catch((err) => console.log(err));
   }
 
+  /** загрузка начальных данных в одном блоке */
   getAllData() {
     return Promise.all([this.getProfile(), this.getInitialCards()]);
   }

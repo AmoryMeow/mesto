@@ -192,13 +192,14 @@ api.getAllData().then(
     });
 
     popupAddCard.setEventListeners();
+
     addButton.addEventListener('click', () => {
       popupAddCard.open();
       cardFormValidador.resetForm();
     });
 
   }
-)
+);
 
 /* картинка */
 const popupImage = new PopupWithImage(popupImageSelector);
